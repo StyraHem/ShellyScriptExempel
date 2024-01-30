@@ -1,0 +1,11 @@
+Shelly.addEventHandler(
+    function (event) {
+        //print(event);
+        if (event.info.event=="BLU_EVENT") {
+          if (event.info.data.button==1 /* && event.info.data.addr=='' */) {
+            Shelly.call("Switch.Toggle", {id: 0});
+          }
+        }
+    },
+    null
+);
