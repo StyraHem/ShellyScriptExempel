@@ -1,3 +1,7 @@
+/* This script listen on a BLU remote and toggle the output when clicked.
+ * You must also install BLU/blu2event.js to make this script working.
+ */
+
 Shelly.addEventHandler(
     function (event) {
         //print(event);
