@@ -1,0 +1,14 @@
+Shelly.addEventHandler(
+    function (event) {
+        //print(event);
+        var data = event.info.data;
+        if (event.info.event=="REMOTE_GEN1") {
+          let postData = {
+            url: "http://" + data.addr + "/" + data.method
+            //body: data,
+          };
+          Shelly.call("HTTP.POST", postData); //, RemoteShelly._cb, callback);
+        }
+    },
+    null
+);
