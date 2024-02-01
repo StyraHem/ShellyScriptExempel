@@ -1,8 +1,8 @@
 Shelly.addEventHandler(
     function (event) {
-        //print(event);
-        var data = event.info.data;
         if (event.info.event=="REMOTE_GEN1") {
+          print(event);
+          var data = event.info.data;
           let postData = {
             url: "http://" + data.addr + "/" + data.method
             //body: data,
