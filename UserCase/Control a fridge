@@ -1,0 +1,25 @@
+// This script controls a refrigerator with an attached temperature sensor
+// Shelly Plus 1 with a Shelly Plus Addon and a temperature sensor
+// Author: StyraHem
+
+let minTemp = 5;  //Turn off the fridge when the temperature is below this value
+let maxTemp = 4;  //Turn on the fridge when the temperature is over this value
+
+function switch(state) {
+  print("Turn " + (state ? "on" : "off") + " the fridge";
+  Shelly.call("Switch.Set", {id: 0, on: state});
+}
+
+Shelly.addEventHandler(
+    function (data) {
+      if (data.event=="temperature_change" || data.event=="temperature_measurement") {
+        let temp = data.tC;
+        print("Current temp ", temp);
+        if (temp<minTemp)
+          switch(false);   //Turn off
+        if (temp>maxTemp)
+          switch(true);    //Turn on
+      }
+    },
+    null
+);
