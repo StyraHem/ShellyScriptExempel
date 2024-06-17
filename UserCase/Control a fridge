@@ -5,7 +5,7 @@
 let minTemp = 5;  //Turn off the fridge when the temperature is below this value
 let maxTemp = 4;  //Turn on the fridge when the temperature is over this value
 
-function switch(state) {
+function setSwitch(state) {
   print("Turn " + (state ? "on" : "off") + " the fridge";
   Shelly.call("Switch.Set", {id: 0, on: state});
 }
@@ -16,9 +16,9 @@ Shelly.addEventHandler(
         let temp = data.tC;
         print("Current temp ", temp);
         if (temp<minTemp)
-          switch(false);   //Turn off
+          setSwitch(false);   //Turn off
         if (temp>maxTemp)
-          switch(true);    //Turn on
+          setSwitch(true);    //Turn on
       }
     },
     null
