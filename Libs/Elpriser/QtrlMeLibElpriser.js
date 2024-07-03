@@ -11,8 +11,9 @@ function checkElpris(cfg)
       if (error_code != 0) {
         print("Error", error_message);
       } else {
-        let price = result.body;
-        let on = (price > cfg.price);
+        let on, price = result.body;
+        if (cfg.price)
+          on = price > cfg.price;
         print("Pris=", price, "State=", on);
         if (cfg.switchId != undefined)
           Shelly.call("Switch.Set", {id:cfg.switchId, on: on});
@@ -31,8 +32,7 @@ function startCheckElpris(cfg)
   cfg = cfg || {};
   if (
     checkparam(cfg, "region") ||
-    checkparam(cfg, "token") ||
-    checkparam(cfg, "price")
+    checkparam(cfg, "token")
   ) { return; }
   cfg.interval = cfg.interval || 60;  
   print("Start check elpris with interval " , cfg.interval, "s");
