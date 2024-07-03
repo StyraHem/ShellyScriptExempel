@@ -1,3 +1,13 @@
+Shelly.addEventHandler(function(event) {
+  if (event.info.event=="checkElpris") {
+    let data = event.info.data;
+    let on = data.on; 
+    let price = data.price; 
+
+    //Do what you want with the on or price values....
+  }
+});
+
 Shelly.emitEvent(
   "startCheckElpris", 
   {
