@@ -6,7 +6,7 @@ function checkElpris(cfg)
 {    
   Shelly.call(
     "HTTP.GET",
-    {url: "http://qtrl.me/api/price/" + cfg.region + "?token=" + cfg.token + "&src=QtrlMeLibElpris1"},
+    {url: "http://qtrl.me/api/price/" + cfg.region + "?token=" + cfg.token + "&src=QtrlMeLibElpriser1"},
     function(result, error_code, error_message) {
       if (error_code != 0) {
         print("Error", error_message);
