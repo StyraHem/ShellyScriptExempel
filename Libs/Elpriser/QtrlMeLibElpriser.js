@@ -6,14 +6,17 @@ function checkElpris(cfg)
 {    
   Shelly.call(
     "HTTP.GET",
-    {url: "http://qtrl.me/api/price/" + cfg.region + "?token=" + cfg.token + "&src=QMEP1"},
+    {url: "http://qtrl.me/api/price/" + cfg.region + "?token=" + cfg.token},
     function(result, error_code, error_message) {
       if (error_code != 0) {
         print("Error", error_message);
       } else {
         let on, price = result.body;
-        if (cfg.price)
-          on = price > cfg.price;
+        if (cfg.price) {
+          on = (price < cfg.price);
+          if (cfg.revert)
+            on = !on;
+        }
         print("Pris=", price, "State=", on);
         if (cfg.switchId != undefined)
           Shelly.call("Switch.Set", {id:cfg.switchId, on: on});
