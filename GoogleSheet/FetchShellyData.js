@@ -53,7 +53,7 @@ function fetchShellyData() {
   var lastRow = sheet.getLastRow();
   var lastDate = sheet.getRange(lastRow, 1).getValue();
  
-  Logger.log(totalSum, price);
+  Logger.log("Total=%d Price=%d", totalSum, price);
 
   //Check if next our or update current
   if (lastDate>=now) {
