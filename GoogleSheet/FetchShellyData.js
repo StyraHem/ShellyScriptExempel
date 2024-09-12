@@ -59,7 +59,8 @@ function fetchShellyData() {
   if (lastDate>=now) {
     sheet.getRange(lastRow, 2).setValue(totalSum);
   } else {
-    //const formattedDate = Utilities.formatDate(now, Session.getScriptTimeZone(), "yyyy-MM-dd HH:mm");  
     sheet.appendRow([now, totalSum, price]);
+    const lastRow = sheet.getLastRow();
+    sheet.getRange(lastRow, 1).setNumberFormat("yyyy-MM-dd HH:mm");
   }
 }
