@@ -50,7 +50,7 @@ function fetchShellyData() {
   const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0]; 
 
   //Find last log row
-  var lastRow = sheet.getLastRow();
+  var lastRow = Math.max(sheet.getLastRow(), 1);
   var lastDate = sheet.getRange(lastRow, 1).getValue();
  
   Logger.log("Total=%d Price=%d", totalSum, price);
