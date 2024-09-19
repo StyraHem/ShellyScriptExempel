@@ -40,9 +40,19 @@ function fetchShellyData() {
   const response = UrlFetchApp.fetch(URL);
   const data = JSON.parse(response.getContentText());
 
-  //Calculate total consumption for all phases
-  const totals = data.data.device_status.emeters.map(emeter => emeter.total);
-  const totalSum = totals.reduce((acc, value) => acc + value, 0);
+  //Get total consumption for all phases
+  let totalSum = 0.0;
+  if ('emeter' in data.data.device_status) {
+    //3EM
+    const totals = data.data.device_status.emeters.map(emeter => emeter.total);
+    totalSum = totals.reduce((acc, value) => acc + value, 0);
+  } else if ('emdata:0' in data.data.device_status) {
+    //Pro 3EM
+    totalSum = data.data.device_status['emdata:0'].total_act;
+  } else {
+    Logger.log("Can't find total energy from server");
+    Logger.log(data.data.device_status['emdata:0'].total_act)
+  }
 
   const price = parseFloat(UrlFetchApp.fetch('https://qtrl.me/api/price/' + PRICE_ZONE + '?token=' + QTRLME_TOKEN))
 
