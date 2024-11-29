@@ -18,4 +18,4 @@ function checkTime()
 }
 
 print("Starting");
-Timer.set(60000, true, checkTime);
+Timer.set(1000, true, checkTime);
