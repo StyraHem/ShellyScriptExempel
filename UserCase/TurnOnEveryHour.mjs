@@ -8,14 +8,14 @@ let lastVal = getVal();
 
 function checkTime()
 {
-  Logger.log("Check time");
+  print("Check time");
   var val = getVal();
   if (val != lastVal) {
-    Logger.log("Turn on");
+    print("Turn on");
     statusSet(0 , 1);
     lastVal = val;
   }
 }
 
-Logger.log("Starting");
+print("Starting");
 Timer.set(60000, true, checkTime);
