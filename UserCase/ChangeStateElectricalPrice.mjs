@@ -35,6 +35,7 @@ function checkElpris()
       } else {
         const data = JSON.parse(result.body);
         print("Data=", data);
+        gotElpris(data);
       }
     }
   );
