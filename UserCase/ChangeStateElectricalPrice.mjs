@@ -8,8 +8,8 @@ eller nästa timmes pris eller beroende på de dyraste eller billigaste timmarna
 */
 const cfg = 
 {
-  region : "se3",  //Region se1, se2, se3, se4
-  token : "mrxInj1vCWJ4MplkfQ7lry4365PM1tuq",  //Token from https://qtrl.me
+  region : "",  //Region se1, se2, se3, se4
+  token : "",  //Token from https://qtrl.me
   interval: 5,  //Interval, min 60s
 }
 
@@ -23,6 +23,10 @@ function gotElpris(data)
   //Set state
   Shelly.call("Switch.Set", {id:switchId, on:state});  
 }
+
+
+
+/* DON'T CHANGE BELOW */
 
 function checkElpris() 
 {    
