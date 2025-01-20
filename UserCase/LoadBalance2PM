@@ -1,0 +1,58 @@
+const POWER_THRESHOLD = 2; // Threshold for power below which actions are triggered
+const RESET_DELAY_MS = 5 * 60 * 1000; // Delay in milliseconds (5 minutes) to reset power status
+
+let isPowerBelowThreshold = [false, false]; // Tracks if power on each channel is below the threshold
+let powerResetTimer = null; // Timer to turn on both channels after the delay
+
+// Resets the tracking status for both channels
+function resetPowerStatus() {
+  isPowerBelowThreshold = [false, false];
+}
+
+// Event handler for power events
+function handlePowerEvent(event, data) {
+  try {
+    const currentPower = event.info.apower; // Current power reading of the channel
+    const currentChannel = event.info.id; // ID of the current channel
+    const otherChannel = currentChannel === 0 ? 1 : 0; // ID of the other channel
+
+    // Ensure currentPower is defined before processing
+    if (typeof currentPower !== "undefined") {
+      // Update the tracking status for the current channel
+      isPowerBelowThreshold[currentChannel] = currentPower <= POWER_THRESHOLD;
+
+      // If power on the current channel exceeds the threshold
+      if (currentPower > POWER_THRESHOLD) {
+        // Turn off the other channel
+        Shelly.call("Switch.Set", { id: otherChannel, on: false });
+
+        // Clear the timer if it is running, as one channel is above the threshold
+        if (powerResetTimer !== null) {
+          Timer.clear(powerResetTimer);
+          powerResetTimer = null;
+        }
+      } else {
+        // Check if power on both channels is below the threshold
+        if (isPowerBelowThreshold[0] && isPowerBelowThreshold[1] && powerResetTimer === null) {
+          // Start a timer to turn on both channels after the reset delay
+          powerResetTimer = Timer.set(RESET_DELAY_MS, false, function () {
+            // Turn on both channels
+            Shelly.call("Switch.Set", { id: 0, on: true });
+            Shelly.call("Switch.Set", { id: 1, on: true });
+
+            // Reset the power tracking states
+            resetPowerStatus();
+            powerResetTimer = null; // Clear the timer reference
+          });
+        }
+      }
+    }
+  } catch (error) {
+    // Handle and log any errors during execution
+    print("Error: ", error);
+  }
+}
+
+// Initialization
+print("Starting power monitoring script");
+Shelly.addEventHandler(handlePowerEvent);
