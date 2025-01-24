@@ -27,6 +27,7 @@ Shelly.addEventHandler(function (event) {
     // Only call Shelly API if the brightness value has changed
     if (lastBrightness === null || Math.abs(brightness - lastBrightness) > 1) {
       Shelly.call("Light.Set", { id: 0, brightness: brightness });
+      lastBrightness = brightness;
     }
   }
 });
