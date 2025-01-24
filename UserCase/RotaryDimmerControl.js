@@ -18,6 +18,7 @@ Shelly.addEventHandler(function (event) {
   print(volt); // Debug print of the analog value
   if (volt) {
     // Set the brightness based on the analog value
-    Shelly.call("Light.Set", { id: 0, brightness: volt * 10 });
+    const brightness = Math.round(volt * 10);
+    Shelly.call("Light.Set", { id: 0, brightness: brightness });
   }
 });
