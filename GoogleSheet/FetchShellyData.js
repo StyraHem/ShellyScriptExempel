@@ -65,7 +65,7 @@ function fetchShellyData() {
   const data = JSON.parse(response.getContentText());
 
   //Get total consumption for all phases
-  let totalSum = 0.0;
+  let totalSum = null;
   if ('emeter' in data.data.device_status) {
     //3EM
     const totals = data.data.device_status.emeters.map(emeter => emeter.total);
@@ -73,10 +73,12 @@ function fetchShellyData() {
   } else if ('emdata:0' in data.data.device_status) {
     //Pro 3EM
     totalSum = data.data.device_status['emdata:0'].total_act;
-  } else if ('pm1:0' in data.data.device_status) {
-    totalSum = 
+  } else {
+    //Shelly PM devices
+    totalSum = getEnergy(data);
   }
-  else {
+ 
+  if (totalSum === null) {
     Logger.log("Can't find total energy from server");
     Logger.log(data.data.device_status)
   }
