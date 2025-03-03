@@ -22,7 +22,7 @@ const SHELLY_AUTH_KEY = 'XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 const SHELLY_DEVICE_ID = 'XXXXXXXXXXXX'  //Shelly device ID (hex version) that you found under device settings
 
 //Token from Qtrl.me account from https://qtrl.me
-const QTRLME_TOKEN = 'mrxInj1vCWJ4MplkfQ7lry4365PM1tuq';
+const QTRLME_TOKEN = 'XXXXXXX';
 
 //What price zone to ues; SE1, SE2, SE3, SE4 (only sweden)
 const PRICE_ZONE = 'SE3'
