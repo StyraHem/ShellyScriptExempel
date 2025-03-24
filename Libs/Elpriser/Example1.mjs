@@ -9,5 +9,6 @@ Shelly.emitEvent(
     revert: false, //[Optinal] Set to tru to turn on when price under
     interval: 600, //Interval, min 60s
     switchId: 0,   //[Optional] Id of internal switch to control
+    errorState: false //[optional] Turn of/on the output when device offline or problem connecting qtrl.me.
   }
 );
