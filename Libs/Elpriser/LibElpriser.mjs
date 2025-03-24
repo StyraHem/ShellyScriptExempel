@@ -9,6 +9,8 @@ function checkElpris(cfg)
     {url: "http://qtrl.me/api/price/" + cfg.region + "?token=" + cfg.token},
     function(result, error_code, error_message) {
       if (error_code != 0) {
+        if (cfg.switchId != undefined && cfg.errorState != undefined )
+          Shelly.call("Switch.Set", {id:cfg.switchId, on: cfg.errorState});
         print("Error", error_message);
       } else {
         let on, price = result.body;
