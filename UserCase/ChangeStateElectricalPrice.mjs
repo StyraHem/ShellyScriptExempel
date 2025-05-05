@@ -12,7 +12,7 @@ const cfg =
 {
   region : "",       //Region se1, se2, se3, se4
   token : "",        //Token from https://qtrl.me
-  interval: 60,      //Interval, min 60s
+  interval: 60,      //Interval, min 60s, lower value than 60s sould only used when testing
   switchId: 0,       //Change status of switch nr 0=first 1=2:nd
   maxErrors: 5,      //When it get X errors in row the output will -
   errorState: true,  //be changed to this value. Set maxErrors to 0 to 
