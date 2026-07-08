@@ -21,7 +21,7 @@
 
 let CONFIG = {
   switchId: 0,                                          // Shelly Plug S har en switch = id 0
-  checkUrl: "http://clients3.google.com/generate_204",  // svarar HTTP 204 när nätet funkar
+  checkUrl: "http://google.com/generate_204",  // svarar HTTP 204 när nätet funkar
   checkEverySec: 60,                                    // hur ofta internet kollas
   minutesDownBeforeRestart: 5,                          // nedtid innan första omstart
   powerOffSec: 20,                                      // hur länge strömmen bryts
